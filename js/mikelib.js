@@ -1,3 +1,5 @@
+'use strict';
+
 var M = {};
 
 M.classContains = function (element, item) {
@@ -60,27 +62,19 @@ M.makeUnselectable = function (element) {
 };
 
 M.make = function (tag, options) {
-  var element = document.createElement(tag),
-      keys = [ 'id', 'className', 'innerHTML' ],
-      attributes,
-      i;
+  var keys, key, i,
+      element = document.createElement(tag);
   if (options === undefined) {
     return element;
   }
-  console.log(tag, options);
-  for (i = 0; i < keys.length; ++i) {
-    if (keys[i] in options) {
-      element[keys[i]] = options[keys[i]];
-    }
-  }
-  if ('attributes' in options) {
-    attributes = options.attributes;
-    for (i = 0; i < attributes.length; ++i) {
-      element[attributes[i].name] = attributes[i].value;
-    }
-  }
-  if (options.parent !== undefined) {
+  if ('parent' in options) {
     options.parent.appendChild(element);
+    delete options.parent;
+  }
+  keys = Object.keys(options);
+  for (i = keys.length - 1; i >= 0; --i) {
+    key = keys[i];
+    element[key] = options[key];
   }
   return element;
 };
