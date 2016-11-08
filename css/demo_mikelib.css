@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
 }
 
 .unselectable {
@@ -12,4 +13,30 @@
   -moz-user-select: -moz-none;
   -ms-user-select: none;
   user-select: none;
+}
+
+body {
+  background: #f0eee4;
+}
+
+#wrapper {
+  margin: 10px;
+  padding: 20px;
+  background: #fff;
+}
+
+.display {
+  font-size: 18px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: #f1faee;
+}
+
+input {
+  font-size: 18px;
+  outline: none;
+  margin-top: 15px;
+  padding: 3px 4px;
+  border: 2px solid #bbb;
+  border-radius: 4px;
 }
