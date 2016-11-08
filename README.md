@@ -10,14 +10,14 @@ It includes a demo page that looks like this:
 
 The page demonstrates the usage of `M.make` and `M.makeUnselectable`.
 
-Currently these functions are available:
+The `M` module offers these functions:
 
-- make: Create a new DOM element with arbitrary attributes.
-- classContains: Check an element's className for a name.
-- classAdd: Modify an element's className by adding a name.
-- classRemove: Modify an element's className by removing a name.
-- makeUnselectable: Make an element unselectable by the user.
-- getOffset: Compute an element's left and top offset relative to an ancestor.
-- getMousePosition: Get event coordinates relative to the page's top left corner.
+- `make(tag, options)`: Create a new DOM element with arbitrary attributes.
+- `classContains(element, name)`: Check an element's className for a name.
+- `classAdd(element, name)`: Modify an element's className by adding a name.
+- `classRemove(element, name)`: Modify an element's className by removing a name.
+- `makeUnselectable(element)`: Make an element unselectable by the user.
+- `getOffset(element, ancestor)`: Compute an element's left and top offset relative to an ancestor.
+- `getMousePosition(event)`: Get event coordinates relative to the page's top left corner.
 
 

@@ -1,6 +1,7 @@
 var M = (function () {
   'use strict';
 
+  // Create a new DOM element with arbitrary attributes.
   function make(tag, options) {
     var keys, i,
         element = document.createElement(tag);
@@ -18,46 +19,53 @@ var M = (function () {
     return element;
   }
 
-  function classContains(element, item) {
-    var className = element.className;
+  // Check an element's className for a name.
+  function classContains(element, name) {
+    var names, i,
+        className = element.className;
     if (className === '' || className === null || className === undefined) {
       return false;
     }
-    var items = className.split(/\s+/);
-    for (var i = items.length-1; i >= 0; --i) {
-      if (items[i] === item) {
+    names = className.split(/\s+/);
+    for (i = names.length-1; i >= 0; --i) {
+      if (names[i] === name) {
         return true;
       }
     }
     return false;
   }
 
-  function classAdd(element, item) {
-    if (classContains(element, item)) {
+  // Modify an element's className by adding a name.
+  function classAdd(element, name) {
+    var className;
+    if (classContains(element, name)) {
       return;
     }
-    var className = element.className;
+    className = element.className;
     if (className === '' || className === null || className === undefined) {
-      element.className = item;
+      element.className = name;
     } else {
-      element.className = className + ' ' + item;
+      element.className = className + ' ' + name;
     }
   }
 
-  function classRemove(element, item) {
-    if (!classContains(element, item)) {
+  // Modify an element's className by removing a name.
+  function classRemove(element, name) {
+    var names, newNames, i;
+    if (!classContains(element, name)) {
       return;
     }
-    var items = element.className.split(/\s+/),
-        newItems = [];
-    for (var i = items.length-1; i >= 0; --i) {
-      if (items[i] !== item) {
-        newItems.push(items[i]);
+    names = element.className.split(/\s+/);
+    newNames = [];
+    for (i = names.length-1; i >= 0; --i) {
+      if (names[i] !== name) {
+        newNames.push(names[i]);
       }
     }
-    element.className = newItems.join(' ');
+    element.className = newNames.join(' ');
   }
 
+  // Prevent the user from selecting an element with the mouse.
   function makeUnselectable(element) {
     // Based on Evan Hahn's advice:
     //   http://evanhahn.com/how-to-disable-copy-paste-on-your-website/
@@ -77,6 +85,7 @@ var M = (function () {
     };
   }
 
+  // Compute an element's left and top offset relative to an ancestor.
   function getOffset(element, ancestor) {
     var left = 0,
         top = 0,
@@ -93,6 +102,7 @@ var M = (function () {
     return { left: left, top: top };
   }
 
+  // Get event coordinates relative to the page's top left corner.
   function getMousePosition(event) {
     event = event || window.event;
     if (event.pageX) {
